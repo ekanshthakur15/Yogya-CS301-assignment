@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Welcome to the Cultural Destination of India!</h1>
+
+  <h2>Exhibits</h2>
+  {% for exhibit in exhibits %}
+    <div class="card">
+      <img src="{{ exhibit.image.url }}" alt="{{ exhibit.title }}" style="width:100%">
+      <div class="container">
+        <h4><b>{{ exhibit.title }}</b></h4>
+        <p>{{ exhibit.description }}</p>
+        <p><b>Location:</b> {{ exhibit.location }}</p>
+        <a href="{% url 'create_favorite' exhibit.id 'exhibit' %}">Add to favorites</a>
+      </div>
+    </div>
+  {% empty %}
+    <p>There are no exhibits available.</p>
+  {% endfor %}
+
+  <h2>Events</h2>
+  {% for event in events %}
+    <div class="card">
+      <img src="{{ event.image.url }}" alt="{{ event.title }}" style="width:100%">
+      <div class="container">
+        <h4><b>{{ event.title }}</b></h4>
+        <p>{{ event.description }}</p>
+        <p><b>Location:</b> {{ event.location }}</p>
+        <a href="{% url 'create_favorite' event.id 'event' %}">Add to favorites</a>
+      </div>
+    </div>
+  {% empty %}
+    <p>There are no events available.</p>
+  {% endfor %}
+
+  <h2>Talents</h2>
+  {% for talent in talents %}
+    <div class="card">
+      <img src="{{ talent.image.url }}" alt="{{ talent.name }}" style="width:100%">
+      <div class="container">
+        <h4><b>{{ talent.name }}</b></h4>
+        <p>{{ talent.description }}</p>
+        <p><b>Category:</b> {{ talent.category }}</p>
+        <a href="{% url 'create_favorite' talent.id 'talent' %}">Add to favorites</a>
+      </div>
+    </div>
+  {% empty %}
+    <p>There are no talents available.</p>
+  {% endfor %}
+{% endblock %}
